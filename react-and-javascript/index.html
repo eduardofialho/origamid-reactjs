@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React and JavaScript</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="javascript-app">
+      <p>Total: <span id="total"></span></p>
+      <p>Preço: R$ <span id="price"></span></p>
+      <button id="button">Comprar</button>
+    </div>
+    <script type="application/javascript">
+      const total = document.getElementById("total");
+      const price = document.getElementById("price");
+      const button = document.getElementById("button");
+
+      let counter = 1;
+
+      function updateValues(counter) {
+        total.innerText = counter;
+        price.innerText = counter * 250;
+      }
+      updateValues(counter);
+
+      function handleClick() {
+        counter++;
+        updateValues(counter);
+      }
+
+      button.addEventListener("click", handleClick);
+    </script>
+
+    <div id="react-app"></div>
+
+    <script type="text/babel">
+      const Buy = () => {
+        const [counter, setCounter] = React.useState(1);
+
+        return (
+          <div>
+            <p>Total: {counter}</p>
+            <p>Preço: R$ {counter * 250}</p>
+            <button onClick={() => setCounter(counter + 1)}>Comprar</button>
+          </div>
+        );
+      };
+      ReactDOM.createRoot(document.getElementById("react-app")).render(<Buy />);
+    </script>
+  </body>
+</html>
